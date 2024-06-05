@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Notice</title>
+   <link rel="stylesheet" href="PG_world.css" >
+</head>
+<body>
+   <h1>Welcome</h1>
+
+
+
+
+
+   <form id="noticeForm" onsubmit="submitForm(event)" >
+      <label for="notice"> Notice </label>
+      <select id="area" name="Area" onchange="operation()">
+         <option value="Select Sector"> Sector </option>
+         <option value="Sect 1"> Sect 1 </option>
+         <option value="Sect 2"> Sect 2 </option>
+         <option value="Sect 3"> Sect 3 </option>
+         <option value="Sect 4"> Sect 4 </option>
+         <option value="Sect 8"> Sect 8 </option>
+         <option value="Sect 19"> Sect 19 </option>
+         <option value="Sect 20"> Sect 20 </option>
+      </select>
+
+
+      <div id="Property_selection">
+         <select id="Sect_1" class="hidden" name="Sect_1" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="Riddhi Siddi 311"> Riddhi Siddhi 311 </option>
+            <option value="Riddhi Siddhi 111"> Riddhi Siddhi 111 </option>
+            <option value="Laxmi 104"> Laxmi 104 </option>
+            <option value="laxmi 404"> laxmi 404 </option>
+            <option value="laxmi 503"> laxmi 503 </option>
+            <option value="laxmi 504"> laxmi 504 </option>
+         </select>
+
+         <select id="Sect_2" class="hidden" name="Sect_2" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="Sai Sadan"> Sai Sadan </option>
+            <option value="Krishna Niwas"> Krishna Niwas </option>
+            <option value="Jhulelal"> Jhulelal </option>
+            <option value="Plot 118"> Plot 118 </option>
+            <option value="Plot 124"> Plot 124 </option>
+            <option value="Plot M10"> Plot M10</option>
+            <option value="Plot M8"> Plot M8 </option>
+         </select>
+
+         <select id="Sect_3" class="hidden" name="Sect_3" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="D 104"> D 104 </option>
+            <option value="D 92"> D 92 </option>
+            <option value="F 110"> F 110 </option>
+            <option value="Plot 110"> Plot 110 </option>
+            <option value="H 9"> H 9 </option>
+            <option value="H 239"> H 239 </option>
+            <option value="G 148"> G 148 </option>
+            <option value="K-18"> K 18 </option>
+            <option value="Asha villa"> Asha villa </option>
+            <option value="Raj kamal"> Raj Kamal </option>
+         </select>
+
+         <select id="Sect_4" class="hidden" name="Sect_4" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="B-41"> B 41 </option>
+            <option value="Sai Dham"> Sai Dham </option>
+         </select>
+
+         <select id="Sect_8" class="hidden" name="Sect_8" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="Sea SIde"> Sea Side </option>
+            <option value="Akta Niwas"> Akta Niwas </option>
+         </select>
+
+         <select id="Sect_19" class="hidden" name="Sect_19" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="Sagarnath"> Sagarnath </option>
+            <option value="Airoli Heights"> Airoli Heights</option>
+         </select>
+
+         <select id="Sect_20" class="hidden" name="Sect_20" onchange="updateProperty(this)">
+            <option value="Select Property"> Select Property </option>
+            <option value="Bethal"> Bethal </option>
+            <option value="Vrindavan"> Vrindavan </option>
+            <option value="Raghunath"> Raghunath </option>
+            <option value="Shree 704"> Shree 704 </option>
+            <option value="Shree 705"> Shree 705</option>
+            <option value="C 404"> C 404 </option>
+            <option value="Dalvi Niwas"> Dalvi Niwas</option>
+         </select>
+      </div>
+
+
+      <div>
+         <label for="Name"> Name </label>
+         <input type="text" id="Name" name="Name"> <br>
+          
+         <label for="Deposit"> Deposit </label>
+         <input type="number" id="Deposit" name="Deposit"> <br>
+
+         <div class="radio-group">
+            <label style="font-weight: bold;" for="AC" class="radio-label">AC/Non AC</label><br>
+            <input type="radio" id="AC" name="AC" value="AC" onclick="updateLightBill()">
+            <label for="AC">AC</label><br>
+            <input type="radio" id="Non_AC" name="AC" value="Non AC" onclick="updateLightBill()">
+            <label for="Non_AC">Non AC</label><br>
+         </div>
+
+         <label for="rentdate"> Rent Date </label>
+         <input type="date" id="rentdate" name="rentdate"> <br>
+         <label for="noticedate"> Notice Date </label>
+         <input type="date" id="noticedate" name="noticedate"> <br>
+         <label for="leavingdate"> Leaving Date </label>
+         <input type="date" id="leavingdate" name="leavingdate"> <br>
+
+         <input type="submit" value="Submit" > <br>
+      </div>
+
+
+    <div class="output"  id="Bill">
+    </div>
+
+    <div class="output"  id="result">
+    </div>
+    
+    <div class="output" id="Ref">
+    </div>
+     
+   
+   </form>
+
+
+
+
+
+   <script>
+
+
+
+
+
+function R_AMt() {
+    var R_date = document.getElementById("rentdate").value;
+    var L_date = document.getElementById("leavingdate").value;
+    var N_date = document.getElementById("noticedate").value;
+
+    var rangeStart = new Date(R_date);
+    rangeStart.setDate(rangeStart.getDate() - 5);
+
+    var rangeEnd = new Date(R_date);
+    rangeEnd.setDate(rangeEnd.getDate() + 5);
+
+    if (new Date(N_date) < rangeStart || new Date(N_date) > rangeEnd) {
+        return "Notice is unacceptable";
+    }
+
+    var differenceInTime = new Date(L_date) - new Date(R_date);
+    var differenceInDays = Math.ceil((differenceInTime / (1000 * 3600 * 24)) - 30);
+
+    if (differenceInDays > 0) {
+        var rentAmount = differenceInDays * 500;
+        return rentAmount;
+    } else {
+        return "Leaving date must be after rent date.";
+    }
+}
+
+
+        function getLightBill() {
+         var acRadio = document.getElementById("AC");
+         if (acRadio.checked) {
+            return 500;
+         } else {
+            return 2000;
+         }
+      }
+
+      
+
+function RefundAmt() {
+    var resultText = document.getElementById("result").innerText.trim();
+    var billText = document.getElementById("Bill").innerText.trim();
+    var depositValue = document.getElementById("Deposit").value.trim();
+
+    console.log("Result Text:", resultText);
+    console.log("Bill Text:", billText);
+    console.log("Deposit Value:", depositValue);
+
+    var result = parseFloat(resultText);
+    var bill = parseFloat(billText);
+    var deposit = parseFloat(depositValue);
+
+    console.log("Result:", result);
+    console.log("Bill:", bill);
+    console.log("Deposit:", deposit);
+
+    if (isNaN(result) || isNaN(bill) || isNaN(deposit)) {
+        return "Error: Invalid input for refund calculation.";
+    }
+
+    var refund = deposit - result - bill;
+    return refund;
+}
+
+
+
+
+
+
+
+      function updateProperty(selectElement) {
+         var selectedValue = selectElement.value;
+         document.getElementById('selectedProperty').value = selectedValue;
+      }
+
+
+
+
+      function operation() {
+         var area = document.getElementById("area").value;
+         var sections = ["Sect_1", "Sect_2", "Sect_3", "Sect_4", "Sect_8", "Sect_19", "Sect_20"];
+
+         sections.forEach(function(section) {
+            document.getElementById(section).classList.add("hidden");
+         });
+
+         switch(area) {
+            case "Sect 1":
+               document.getElementById("Sect_1").classList.remove("hidden");
+               break;
+            case "Sect 2":
+               document.getElementById("Sect_2").classList.remove("hidden");
+               break;
+            case "Sect 3":
+               document.getElementById("Sect_3").classList.remove("hidden");
+               break;
+            case "Sect 4":
+               document.getElementById("Sect_4").classList.remove("hidden");
+               break;
+            case "Sect 8":
+               document.getElementById("Sect_8").classList.remove("hidden");
+               break;
+            case "Sect 19":
+               document.getElementById("Sect_19").classList.remove("hidden");
+               break;
+            case "Sect 20":
+               document.getElementById("Sect_20").classList.remove("hidden");
+               break;
+         }
+      }
+function submitForm(event) {
+    event.preventDefault();
+    var result = R_AMt();
+    var Bill= getLightBill();
+    var Ref=RefundAmt();
+    document.getElementById("Bill").innerText = Bill;
+    document.getElementById("result").innerText = result;
+    document.getElementById("Ref").innerText = Ref;
+    
+}
+   </script>
+
+   <style>
+      .hidden {
+         display: none;
+      }
+   </style>
+
+</body>
+</html>
+
+
